@@ -123,7 +123,7 @@ Report bugs to https://github.com/fail2ban/fail2ban/issues
 				version="%prog " + version)
 
 	p.add_options([
-		Option("-c", "--config", default='/etc/fail2ban',
+		Option("-c", "--config", default='/opt/etc/fail2ban',
 			   help="set alternate config directory"),
 		Option("-d", "--datepattern",
 			   help="set custom pattern used to match date/times"),
