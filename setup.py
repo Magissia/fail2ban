@@ -160,8 +160,8 @@ elif "test" in sys.argv:
 	print("")
 
 longdesc = '''
-Fail2Ban scans log files like /var/log/pwdfail or
-/var/log/apache/error_log and bans IP that makes
+Fail2Ban scans log files like /opt/var/log/pwdfail or
+/opt/var/log/apache/error_log and bans IP that makes
 too many password failures. It updates firewall rules
 to reject the IP address or executes user defined
 commands.'''
@@ -175,11 +175,11 @@ else:
 	setup_extra = {}
 
 data_files_extra = []
-if os.path.exists('/var/run'):
+if os.path.exists('/opt/var/run'):
 	# if we are on the system with /var/run -- we are to use it for having fail2ban/
 	# directory there for socket file etc.
 	# realpath is used to possibly resolve /var/run -> /run symlink
-	data_files_extra += [(realpath('/var/run/fail2ban'), '')]
+	data_files_extra += [(realpath('/opt/var/run/fail2ban'), '')]
 
 # Installing documentation files only under Linux or other GNU/ systems
 # (e.g. GNU/kFreeBSD), since others might have protective mechanisms forbidding
@@ -190,7 +190,7 @@ if platform_system in ('solaris', 'sunos'):
 	doc_files.append('README.Solaris')
 if platform_system in ('linux', 'solaris', 'sunos') or platform_system.startswith('gnu'):
 	data_files_extra.append(
-		('/usr/share/doc/fail2ban', doc_files)
+		('/opt/usr/share/doc/fail2ban', doc_files)
 	)
 
 # Get version number, avoiding importing fail2ban.
@@ -238,26 +238,26 @@ setup(
 				for f in w[2]]
 	},
 	data_files = [
-		('/etc/fail2ban',
+		('/opt/etc/fail2ban',
 			glob("config/*.conf")
 		),
-		('/etc/fail2ban/filter.d',
+		('/opt/etc/fail2ban/filter.d',
 			glob("config/filter.d/*.conf")
 		),
-		('/etc/fail2ban/filter.d/ignorecommands',
+		('/opt/etc/fail2ban/filter.d/ignorecommands',
 			[p for p in glob("config/filter.d/ignorecommands/*") if isfile(p)]
 		),
-		('/etc/fail2ban/action.d',
+		('/opt/etc/fail2ban/action.d',
 			glob("config/action.d/*.conf") +
 			glob("config/action.d/*.py")
 		),
-		('/etc/fail2ban/fail2ban.d',
+		('/opt/etc/fail2ban/fail2ban.d',
 			''
 		),
-		('/etc/fail2ban/jail.d',
+		('/opt/etc/fail2ban/jail.d',
 			''
 		),
-		('/var/lib/fail2ban',
+		('/opt/var/lib/fail2ban',
 			''
 		),
 	] + data_files_extra,
@@ -272,7 +272,7 @@ elements = {
 		[
 			"fail2ban.conf"
 		],
-	"/usr/bin/":
+	"/opt/usr/bin/":
 		[
 			"fail2ban.py"
 		],
