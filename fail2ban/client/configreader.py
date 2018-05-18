@@ -156,7 +156,7 @@ class ConfigReaderUnshared(SafeConfigParserWithIncludes):
 	Use ConfigReader instead.
 	"""
 
-	DEFAULT_BASEDIR = '/etc/fail2ban'
+	DEFAULT_BASEDIR = '/opt/etc/fail2ban'
 	
 	def __init__(self, basedir=None, *args, **kwargs):
 		SafeConfigParserWithIncludes.__init__(self, *args, **kwargs)
